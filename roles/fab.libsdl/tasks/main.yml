@@ -1,0 +1,6 @@
+---
+# tasks file for fl.libsdl
+
+# roles/example/tasks/main.yml
+  - import_tasks: sdl.debian.yml
+    when: (ansible_distribution|lower == "debian") or (ansible_distribution|lower == "ubuntu")
