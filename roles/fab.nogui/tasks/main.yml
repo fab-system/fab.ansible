@@ -1,0 +1,20 @@
+---
+# tasks file for fab.nogui
+    - name: Remove GUI Start on Ubuntu - Edit Grub config file
+      become: yes
+      lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash text"'
+        backup: yes
+      when:  (ansible_distribution|lower == "ubuntu")
+
+    - name: Remove GUI Start on Ubuntu - Reconfigure Grub
+      become: yes
+      command: update-grub
+      when:  (ansible_distribution|lower == "ubuntu")
+
+    - name: Post Install Warning
+      debug:
+        msg: "Computer should be restarted for this change to take effect"
+        
