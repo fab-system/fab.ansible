@@ -1,6 +1,5 @@
 ---
 - hosts: ubuntu 
   roles:
-  - fab.debsources
   - fab.debupdate
   - fab.debcommon

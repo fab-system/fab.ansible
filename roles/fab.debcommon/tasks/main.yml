@@ -4,3 +4,12 @@
 # roles/example/tasks/main.yml
   - import_tasks: common.debian.9.yml
     when: (ansible_distribution|lower == "debian") and (ansible_distribution_major_version == "9")
+  - import_tasks: common.ubuntu.1604.yml
+    when: (ansible_distribution|lower == "ubuntu")
+
+  - name: "Install VMWare tools"
+    become: yes
+    apt:
+      name: "open-vm-tools"
+      state: "present"
+    when: ansible_product_name is match("VMware")    

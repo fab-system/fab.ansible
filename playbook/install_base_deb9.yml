@@ -1,6 +1,9 @@
 ---
-- hosts: debian9 
+- hosts: 192.168.1.25 
   roles:
   - fab.debsources
   - fab.debupdate
   - fab.debcommon
+  - fab.noipv6
+  - fab.confntp
+  - fab.sshkey
