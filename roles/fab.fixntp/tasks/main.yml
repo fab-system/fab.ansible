@@ -1,0 +1,23 @@
+---
+# tasks file for fab.fixntp
+    - name: Stop NTP Ubuntu
+      become: yes
+      service:
+        name: ntp
+        state: stopped
+      
+#      command: systemctl stop ntp.service
+#purge ntp
+    - name: Purge NTP Ubuntu
+      become: yes
+      command: apt-get purge ntp
+
+    - name: Reload apparmor
+      become: yes
+      command: /etc/init.d/apparmor reload
+      
+    - name: Restart ntp
+      become: yes
+      command: /etc/init.d/openntpd restart
+
+ 

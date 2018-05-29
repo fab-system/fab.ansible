@@ -1,0 +1,13 @@
+---
+# tasks
+    - name: install  package debian
+      environment:
+        http_proxy: http://192.168.4.60:3128/
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:      
+        - collectd
+        - collectd-utils
+ 

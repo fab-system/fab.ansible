@@ -1,0 +1,25 @@
+---
+# tasks file for fab.noipv6
+
+  - name: disable ip v6 alpine
+    become: yes
+    shell: echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+    when: ansible_distribution|lower == "alpine" 
+   
+  - name: disable ip v6 ubuntu - config sysctl
+    become: yes
+    vars:
+      confip6: "{{ lookup('file', 'ubuntu.noipv6' ) }}"
+    blockinfile:
+      create: yes
+      backup: yes
+      path: /etc/sysctl.conf
+      block: "{{ confip6 }}"
+    when: (ansible_distribution|lower == "ubuntu") or (ansible_distribution|lower == "debian")
+   
+  - name: disable ip v6 ubuntu - reload sysctl
+    become: yes
+    command: sysctl -p
+    when: (ansible_distribution|lower == "ubuntu")  or (ansible_distribution|lower == "debian") 
+    
+   

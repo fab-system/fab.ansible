@@ -1,0 +1,35 @@
+---
+# tasks file for fab.collectd
+  - import_tasks: collectd.debian.9.yml
+  
+  - name: "Configure collectd"
+    shell: hostname
+    register: hostinfo
+
+  - name: infos
+    debug:
+      msg: "{{  hostinfo }}"
+  
+  - name: copy collectd conf
+    become: yes
+    template:
+      src: base_collectd.conf
+      dest: /etc/collectd/collectd.conf
+      backup: yes
+      owner: root
+      group: root
+#        mode: 0644
+      mode: "u=rw,g=r,o=r"      
+      
+  - name: Config graphite plugin
+    become: yes
+    vars:
+      graphite: "{{ lookup('template', 'graphite.template') }}"
+    blockinfile:
+      create: no
+      backup: yes
+      path: /etc/collectd/collectd.conf
+      block: "{{ graphite }}"
+    when: (graphite_plugin == True )
+          
+        

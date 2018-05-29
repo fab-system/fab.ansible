@@ -1,0 +1,6 @@
+---
+# defaults file for fab.collectd
+graphite_server: graphite.legrand.ad
+graphite_port: 2003
+graphite_plugin: True
+
