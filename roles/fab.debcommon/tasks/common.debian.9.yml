@@ -2,7 +2,7 @@
 # tasks
     - name: install  collectd package debian
       environment:
-        http_proxy: http://192.168.4.60:3128/
+        http_proxy: "{{ proxy }}"
       become: yes
       apt:
         name: "{{ item }}"

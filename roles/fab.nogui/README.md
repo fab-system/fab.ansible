@@ -33,5 +33,8 @@ GPLv3
 Author Information
 ------------------
 
+
 Fabrice LEGRAND, computer engineer
 https://fabsystem.wordpress.com/
+https://github.com/fab-system
+

@@ -1,6 +1,6 @@
 ---
 # tasks file for fab.debsources
-    - name: Copie source list
+    - name: Copie source list debian 9
       become: yes
       copy:
         src: sourcesliste.debian.9
@@ -11,3 +11,13 @@
         mode: 0644
       when: (ansible_distribution|lower == "debian" and ansible_distribution_major_version == "9")
 
+    - name: Copie source list debian 8
+      become: yes
+      copy:
+        src: sourcesliste.debian.8
+        dest: /etc/apt/sources.list
+        backup: yes
+        owner: root
+        group: root
+        mode: 0644
+      when: (ansible_distribution|lower == "debian" and ansible_distribution_major_version == "8")
