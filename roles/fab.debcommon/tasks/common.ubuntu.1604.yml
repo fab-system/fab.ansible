@@ -14,5 +14,7 @@
         - python
         - python-simplejson
         - apt-transport-https
+        - htop
         - software-properties-common
         - tree
+        - usbutils

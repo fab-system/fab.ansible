@@ -13,6 +13,8 @@
         - ntpdate
         - python
         - python-simplejson
+        - htop
         - apt-transport-https
         - software-properties-common
         - tree
+        - usbutils
