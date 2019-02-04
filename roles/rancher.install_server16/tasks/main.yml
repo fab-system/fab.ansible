@@ -1,0 +1,21 @@
+---
+# tasks file for rancher.install_server16
+
+  - name: Creer les repertoires /USR
+    become: true
+    command: mkdir -p /USR/docker/rancher_server_HA /USR/data/rancher/lib /USR/data/rancher/logs
+
+  - name: Copier le fichier docker-compose
+    become: true
+    vars:
+      ADRIP: "{{hostvars[inventory_hostname]['ansible_default_ipv4']['address']}}"
+    template:
+      src: docker-compose.yml
+      dest: /USR/docker/rancher_server_HA/docker-compose.yml
+
+  - name: Lancement du serveur
+    become: true
+    shell: "docker-compose up -d"
+    args:
+      chdir: /USR/docker/rancher_server_HA
+
