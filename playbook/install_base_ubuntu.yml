@@ -1,5 +1,10 @@
 ---
-- hosts: ubuntu 
+- hosts: 192.168.0.25
   roles:
   - fab.debupdate
   - fab.debcommon
+  - fab.sshkey
+  - fab.fixsshd
+  - fab.fixntp
+  - fab.noipv6
+  - fab.confntp
