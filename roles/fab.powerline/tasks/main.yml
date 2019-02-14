@@ -1,0 +1,33 @@
+---
+# tasks file for fab.powerline
+  - name: install powerline fonts et python-pip
+    environment:
+      http_proxy: http://192.168.4.60:3128/
+    become: yes
+    apt:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - python-pip
+      - fonts-powerline
+
+  - name: install powerline
+    environment:
+      http_proxy: http://192.168.4.60:3128/
+    become: yes
+    shell: pip install powerline-status
+
+  - name: Creates directory
+    become: yes
+    file:
+      path: /etc/powerline
+      state: directory
+
+  - name: configure .bashrc
+    become: yes
+    copy:
+      src: bashrc.add
+      dest: /etc/powerline/bash_supp.txt
+      mode: 644
+
+     
